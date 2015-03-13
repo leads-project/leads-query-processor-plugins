@@ -166,8 +166,13 @@ public class SimplePluginRunner implements LeadsListener {
   private void initializePlugin(Cache cache, String plugin) {
     byte[] jarAsBytes = (byte[]) cache.get(plugin + ":jar");
     FSUtilities.flushPluginToDisk(plugin + ".jar", jarAsBytes);
-
-    ConfigurationUtilities.addToClassPath(System.getProperty("java.io.tmpdir") + "/leads/plugins/" + plugin + ".jar");
+    if(!plugin.equals("eu.leads.processor.AdidasProcessingPlugin"))
+    {
+      ConfigurationUtilities.addToClassPath(System.getProperty("java.io.tmpdir") + "/leads/plugins/" + plugin + ".jar");
+    }
+    else{
+      ConfigurationUtilities.addToClassPath(System.getProperty("java.io.tmpdir") + "/leads/plugins/adidas-plugin.jar");
+    }
     byte[] config = (byte[]) cache.get(plugin + ":conf");
     FSUtilities.flushToTmpDisk("/leads/tmp/" + plugin + "-conf.xml", config);
     XMLConfiguration pluginConfig = null;

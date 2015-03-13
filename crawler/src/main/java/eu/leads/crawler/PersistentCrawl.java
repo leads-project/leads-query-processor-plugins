@@ -70,9 +70,9 @@ public class PersistentCrawl {
         try {
             ndays = LQPConfiguration.getConf().getInt("crawler.days");
         } catch (NoSuchElementException e) {
-            ndays = 10;
+            ndays = 365;
         }
-        log.info("Document earler than " + ndays + " day(s)");
+        log.info("Document earlier than " + ndays + " day(s)");
 
 
         proxies.add(Proxy.NO_PROXY);
@@ -80,7 +80,7 @@ public class PersistentCrawl {
 
         DefaultDownloader downloader = new DefaultDownloader();
         downloader.setAllowedContentTypes(new String[] {"text/html", "text/plain"});
-        downloader.setMaxContentLength(100000);
+        downloader.setMaxContentLength(5000000);
         downloader.setTriesCount(3);
         downloader.setProxyController(proxyController);
 

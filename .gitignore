@@ -1,0 +1,14 @@
+**/target/
+**/bin/
+**.jar
+**.bin
+**.class
+**.pyc*
+bin/
+target/
+classifiers/
+**.log*
+.settings
+**~HEAD
+**~e03f4d9d344f6fd3a194915e21811431a493c936
+**~*

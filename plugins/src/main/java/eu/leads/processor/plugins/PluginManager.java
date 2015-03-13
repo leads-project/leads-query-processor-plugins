@@ -32,7 +32,8 @@ public class PluginManager {
     private static Logger log = LoggerFactory.getLogger(PluginManager.class);
 
     public static boolean uploadPlugin(PluginPackage plugin) {
-        if(!plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin") &&  !plugin.getId().equals("eu.leads.processor.plugins.sentiment")) {
+        if(!plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin") &&  !plugin.getId().equals("eu.leads.processor.plugins.sentiment") &&
+               !plugin.getId().equals("eu.leads.processor.AdidasProcessingPlugin")) {
             if (validatePlugin(plugin)) {
                 upload(StringConstants.PLUGIN_CACHE, plugin);
                 return true;
@@ -50,7 +51,8 @@ public class PluginManager {
     }
 
     private static boolean validatePlugin(PluginPackage plugin) {
-        if(plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin")  ||  plugin.getId().equals("eu.leads.processor.plugins.sentiment.SentimentAnalysisPlugin"))
+        if(plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin")  ||  plugin.getId().equals("eu.leads.processor.plugins.sentiment.SentimentAnalysisPlugin") &&
+                                                                                                plugin.getId().equals("eu.leads.processor.AdidasProcessingPlugin"))
             return true;
         if (plugin.getJar().length == 0) {
             log.error("Tried to upload plugin " + plugin.getId() + " without a jar file");
@@ -72,7 +74,8 @@ public class PluginManager {
     private static void upload(String pluginCache, PluginPackage plugin) {
         Cache cache = (Cache) InfinispanClusterSingleton.getInstance().getManager()
                                   .getPersisentCache(pluginCache);
-        if(!plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin") &&  ! plugin.getId().equals("eu.leads.processor.plugins.sentiment.SentimentAnalysisPlugin")) {
+        if(!plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin") &&  ! plugin.getId().equals("eu.leads.processor.plugins.sentiment.SentimentAnalysisPlugin") &&
+               !plugin.getId().equals("eu.leads.processor.AdidasProcessingPlugin")) {
             cache.put(plugin.getId(), plugin);
         }
         else
@@ -186,7 +189,8 @@ public class PluginManager {
 //        configCache.put(prefix+":"+plugin.getId() + ":events", eventmask);
 //        configCache.put(prefix+":"+plugin.getId() + ":className", plugin.getClassName());
         configCache.getAdvancedCache().withFlags(Flag.FORCE_ASYNCHRONOUS,Flag.SKIP_LISTENER_NOTIFICATION,Flag.SKIP_LOCKING,Flag.SKIP_STATISTICS,Flag.IGNORE_RETURN_VALUES);
-        if(!plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin") &&  ! plugin.getId().equals("eu.leads.processor.plugins.sentiment.SentimentAnalysisPlugin"))
+        if(!plugin.getId().equals("eu.leads.processor.plugins.pagerank.PagerankPlugin") &&  ! plugin.getId().equals("eu.leads.processor.plugins.sentiment.SentimentAnalysisPlugin") &&
+            !plugin.getId().equals("eu.leads.processor.AdidasProcessingPlugin"))
         configCache.put(plugin.getId() + ":jar", plugin.getJar());
 
       configCache.put(plugin.getId() + ":conf", plugin.getConfig());
