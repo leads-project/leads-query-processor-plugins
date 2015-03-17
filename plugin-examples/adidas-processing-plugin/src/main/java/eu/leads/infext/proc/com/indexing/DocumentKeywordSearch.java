@@ -46,10 +46,10 @@ public class DocumentKeywordSearch {
 
     // 0. Specify the analyzer for tokenizing text.
     //    The same analyzer should be used for indexing and searching
-    private StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_9);
+    private StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_48);
     // 1. create the index
     private Directory index = new RAMDirectory();
-    private IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_4_9, analyzer);
+    private IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_48, analyzer);
     
     private IndexWriter w = null;
     
@@ -82,7 +82,7 @@ public class DocumentKeywordSearch {
 	    // when no field is explicitly specified in the query.
 	    Query q;
 		try {
-			q = new QueryParser(Version.LUCENE_4_9, "text", analyzer).parse(querystr);
+			q = new QueryParser(Version.LUCENE_48, "text", analyzer).parse(querystr);
 			
 			if(w.isLocked(index)) w.close();
 			

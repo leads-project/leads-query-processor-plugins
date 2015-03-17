@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.apache.commons.configuration.Configuration;
 
 import eu.leads.datastore.impl.CassandraCQLDataStore;
+import eu.leads.datastore.impl.LeadsDataStore;
 
 //import root.datastore.impl.HBaseDataStore;
 //import root.datastore.impl.HiveDataStore;
@@ -37,6 +38,15 @@ public class DataStoreSingleton {
 				int port = conf.getInt("port");
 				String [] hosts = conf.getStringArray("host");
 				dataStore = new CassandraCQLDataStore(mapping,port,hosts);
+			}
+			else if(technology.toLowerCase().equals("leads")) {
+				mappingFile = "mapping/leadsstore.properties";
+				initProperties();
+				initMapping();
+				initParameters();
+				int port = conf.getInt("port");
+				String [] hosts = conf.getStringArray("host");
+				dataStore = new LeadsDataStore(mapping,port,hosts);				
 			}
 		}
 	}
