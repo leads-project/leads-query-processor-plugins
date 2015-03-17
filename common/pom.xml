@@ -10,7 +10,14 @@
 		<version>1.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-
+	
+	<repositories>
+		<repository>
+			 <id>project.local</id>
+			 <name>project</name>
+			 <url>file:${project.basedir}/repo</url> 
+		</repository>
+	</repositories>
 
 	<artifactId>leads-query-processor-common</artifactId>
 
@@ -96,6 +103,12 @@
 			<groupId>com.googlecode.lambdaj</groupId>
 			<artifactId>lambdaj</artifactId>
 			<version>2.3.3</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>gr.tuc.softnet</groupId>
+		  <artifactId>webclient</artifactId>
+		  <version>1</version>
 		</dependency>
 
    </dependencies>
